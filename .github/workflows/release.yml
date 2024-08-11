@@ -1,0 +1,55 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'  # Adjust based on our requirement
+
+      - name: Install dependencies
+        run: composer install --no-dev
+
+      - name: Prepare release
+        run: |
+          mkdir release
+          shopt -s extglob
+          cp -R !(release) release/
+          cd release
+          composer install --no-dev
+          zip -r ../plover-toc.zip . -x '*.git*' -x 'tests/*' -x 'composer.json' -x 'composer.lock' -x '.gitignore' -x '.php-cs-fixer.php' -x '.php_cs' -x 'includes/.keep'
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Release of version ${{ github.ref_name }}.
+            For a list of changes, see [CHANGELOG](https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md).
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./plover-toc.zip
+          asset_name: plover-toc.zip
+          asset_content_type: application/zip

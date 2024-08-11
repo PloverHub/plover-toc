@@ -1,0 +1,40 @@
+{
+  "name": "ploverhub/plover-toc",
+  "description": "A simple and efficient WordPress plugin that automatically generates a table of contents (TOC) for your posts, pages and custom post types.",
+  "keywords": ["wordPress", "plugin"],
+  "license": "GPL-3.0-only",
+  "authors": [
+    {
+      "name": "Wasseem Khayrattee",
+      "email": "hey@wk.contact"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "config": {
+    "vendor-dir": "includes/vendor",
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true,
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "PloverToc\\": "src/Core"
+    },
+    "files": ["src/plover-toc_plugin_helper.php"]
+  },
+  "require": {
+    "caseyamcl/toc": "3.1"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org/"
+    }
+  ]
+}
