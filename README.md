@@ -1,7 +1,7 @@
 # PloverToc - A Table of Contents WordPress Plugin #
 
 **Contributors:** [Wasseem Khayrattee](https://profiles.wordpress.org/wkhayrattee/)  
-**Tags:** table of contents, toc 
+**Tags:** table of contents, toc  
 **Requires at least:** 6.4.0  
 **Tested up to:** 6.6.1  
 **Stable tag:** 0.7.0  
