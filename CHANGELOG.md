@@ -2,7 +2,7 @@
 
 ### 0.7.0 (Aug 11, 2024) ###
 * Rebrand the plugin from "ClaraPress" to "PloverToc":
-    * The WordPress Plugin Review Team warned of infringement on the WordPress trademark by virtue of the portmanteau in which the "Press" part in "ClaraPress" was deemed as a composition of Clara and WordPress and hence a violation of the WordPress trademark policy. 
+    * The WordPress Plugin Review Team warned of infringement on the WordPress trademark by virtue of the portmanteau effect in which the "Press" part in "ClaraPress" was deemed as a composition of Clara and WordPress and hence a violation of the WordPress trademark policy. 
     * This also meant I had to abandon my ClaraPress.com domain name and move to a new one, namely PloverHub.com
 
 ### 0.6.3 (Jul 1, 2024) ###
