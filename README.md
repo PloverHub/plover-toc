@@ -3,7 +3,7 @@
 **Contributors:** [Wasseem Khayrattee](https://profiles.wordpress.org/wkhayrattee/)  
 **Tags:** table of contents, toc 
 **Requires at least:** 6.4.0  
-**Tested up to:** 6.5.5  
+**Tested up to:** 6.6.1  
 **Stable tag:** 0.7.0  
 **License:** GPL-3.0-only  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
@@ -58,6 +58,8 @@ Additionally, it does add SiteNavigationElement schema to enhance your site's SE
 `[plovertoc top_level="1" depth="2"]` would mean generating a TOC that includes only H1, and H2 headings.
 
 ### Styling ###
+
+You can target the css class "plover-toc-wrapper" and "plover-toc-items". See below the actual HTML structure to guide you.
 
 ```html
 <div class="plover-toc-wrapper">

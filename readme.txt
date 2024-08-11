@@ -2,7 +2,7 @@
 Contributors: Wasseem Khayrattee
 Tags: table of contents, toc
 Requires at least: 6.4.0
-Tested up to: 6.5.5
+Tested up to: 6.6.1
 Stable tag: 0.7.0
 Requires PHP: 8.0
 License: GPL-3.0-only
@@ -60,6 +60,8 @@ Additionally, it does add SiteNavigationElement schema to enhance your site's SE
 
 
 ### Styling ###
+
+You can target the css class "plover-toc-wrapper" and "plover-toc-items". See below the actual HTML structure to guide you.
 
 ```html
 <div class="plover-toc-wrapper">
@@ -126,7 +128,7 @@ There are many ways you can contribute:
 
 ### 0.7.0 (Aug 11, 2024) ###
 * Rebrand the plugin from "ClaraPress" to "PloverToc":
-    * The WordPress Plugin Review Team warned of infringement on the WordPress trademark by virtue of the portmanteau in which the "Press" part in "ClaraPress" was deemed as a composition of Clara and WordPress and hence a violation of the WordPress trademark policy.
+    * The WordPress Plugin Review Team warned of infringement on the WordPress trademark by virtue of the portmanteau effect in which the "Press" part in "ClaraPress" was deemed as a composition of Clara and WordPress and hence a violation of the WordPress trademark policy.
     * This also meant I had to abandon my ClaraPress.com domain name and move to a new one, namely PloverHub.com
 
 ### 0.6.0 (Jun 30, 2024) ###
