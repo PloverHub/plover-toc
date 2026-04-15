@@ -42,8 +42,9 @@ class PluginManager
             // Register the shortcode
             add_shortcode(TableOfContents::TOC_SHORTCODE, [TableOfContents::class, 'load_toc']);
 
-            // Now Add id anchor attributes to the <Hx> html tags
-            add_filter('the_content', [TableOfContents::class, 'fix_content_by_adding_anchors'], 5);
+            // Add id anchor attributes to the <Hx> html tags.
+            // Priority 20 ensures this runs after do_blocks (priority 9) so headings are real HTML.
+            add_filter('the_content', [TableOfContents::class, 'fix_content_by_adding_anchors'], 20);
         }, 5);
     }
 }

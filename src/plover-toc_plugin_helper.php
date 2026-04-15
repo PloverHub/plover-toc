@@ -13,6 +13,22 @@ function plovertoc_log(string $level, string $message, array $context = []): voi
     );
 }
 
+/**
+ * Generate the inner <li> HTML for a TOC list from already-rendered post content.
+ *
+ * The content must have already passed through the_content filters (so headings carry
+ * id attributes added by MarkupFixer). Call this after apply_filters('the_content', ...).
+ *
+ * Returns empty string when the plugin is not loaded or no H2–H4 headings are found.
+ *
+ * @param string $rendered_content Post content after the_content filter chain.
+ * @return string Inner HTML for <ul class="toc-list">, or '' if nothing to show.
+ */
+function plovertoc_generate_toc_items_html(string $rendered_content): string
+{
+    return \PloverToc\TableOfContents::build_toc_from_rendered_content($rendered_content);
+}
+
 function plovertoc_clear_log(string $log_file_path): bool
 {
     global $wp_filesystem;
