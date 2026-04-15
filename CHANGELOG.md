@@ -1,5 +1,39 @@
 # Changelog Details
 
+### 0.8.0 (Apr 15, 2026) ###
+
+#### Fixed
+* **Priority bug with block-based content** — `MarkupFixer` was hooked to `the_content` at priority 5,
+  which runs *before* WordPress renders blocks (`do_blocks` runs at priority 9). On block-based posts
+  the headings were still `<!-- wp:heading -->` comments when MarkupFixer ran, so no `id` attributes
+  were ever added. Priority changed to 20 so MarkupFixer processes real `<h2>`/`<h3>` HTML.
+
+#### Changed
+* **Heading IDs are now added to all content, not only shortcode posts** — the `has_shortcode` guard
+  has been removed from `fix_content_by_adding_anchors`. Every post processed by `the_content` filter
+  now gets `id` attributes on its headings. This aligns with the plugin description ("adds ID anchor
+  attributes for proper in-page links") and is harmless for sites not using the shortcode.
+  *Migration note for existing users*: if you relied on the plugin only modifying shortcode posts,
+  heading IDs will now appear on all posts. This is safe in practice; if you need opt-in behaviour,
+  add `remove_filter('the_content', ['PloverToc\TableOfContents', 'fix_content_by_adding_anchors'], 20)`
+  and re-add it selectively.
+
+#### Added
+* `TableOfContents::build_toc_from_rendered_content(string $rendered_content): string` — new public
+  static method that parses H2–H4 headings from already-rendered post content (after the full
+  `the_content` filter chain, so headings already carry `id` attributes) and returns the inner `<li>`
+  HTML for a themed TOC widget. Does not run `MarkupFixer` a second time.
+* `plovertoc_generate_toc_items_html(string $rendered_content): string` — global helper function
+  (autoloaded) that themes can call to retrieve server-side TOC markup. Returns an empty string if no
+  H2–H4 headings with `id` attributes are found, making conditional rendering trivial.
+* **Heading anchor links** — opt-in feature that injects a permalink icon (`<a class="plovertoc-anchor-link">`)
+  inside every H2–H4 heading after its text. Disabled by default; themes enable it with one line:
+  `add_filter('plovertoc_anchor_links', '__return_true');`
+  The `plovertoc-anchor-link` CSS class is the styling hook. JS can enhance the link with
+  copy-to-clipboard behaviour (construct full URL from `window.location` + the `href` fragment).
+  A double-injection guard ensures the link is never added twice even if the filter chain fires
+  the content multiple times.
+
 ### 0.7.0 (Aug 11, 2024) ###
 * Rebrand the plugin from "ClaraPress" to "PloverToc":
     * The WordPress Plugin Review Team warned of infringement on the WordPress trademark by virtue of the portmanteau effect in which the "Press" part in "ClaraPress" was deemed as a composition of Clara and WordPress and hence a violation of the WordPress trademark policy. 
